@@ -3,6 +3,96 @@ import Vendor from "../models/vendorSchema.js";
 import User from '../models/userSchema.js'
 import GenerateQuotation from '../models/generatedQuotationSchema.js'
 
+// export const createBooking = async (req, res) => {
+//   try {
+//     const vendorId = req.params.vendorId;
+//     const { message, quotationId, bookingMode, planId } = req.body;
+//     const customerId = req.user.id;
+
+//     const user = await User.findById(customerId);
+
+//     if (!user) {
+//       return res.status(404).json({ message: "User not found" });
+//     }
+
+//     let bookingData = {
+//       vendorId,
+//       customerId,
+//       customerName: user.name,
+//       customerEmail: user.email,
+//       customerPhone: user.phone,
+//       message: message || "",
+//       bookingMode,
+//     };
+
+   
+//     if (bookingMode === "PLANNED") {
+//       if (!quotationId) {
+//         return res.status(400).json({
+//           success: false,
+//           message: "Quotation required for planned booking",
+//         });
+//       }
+
+//       const quotation = await GenerateQuotation.findById(quotationId);
+
+//       if (!quotation) {
+//         return res.status(404).json({
+//           success: false,
+//           message: "Quotation not found",
+//         });
+//       }
+
+//       if (quotation.customerId.toString() !== customerId) {
+//         return res.status(403).json({
+//           success: false,
+//           message: "Unauthorized",
+//         });
+//       }
+
+//       bookingData = {
+//         ...bookingData,
+//         quotationId: quotation._id,
+//         vendorPriceAtBooking: quotation.vendorPrice,
+//         discount: quotation.discount,
+//         extraCharges: quotation.extraCharges,
+//         finalPrice: quotation.finalPrice,
+//       };
+//     }
+
+    
+//     if (bookingMode === "DIRECT") {
+//       const vendor = await Vendor.findById(vendorId);
+
+//       if (!vendor) {
+//         return res.status(404).json({
+//           success: false,
+//           message: "Vendor not found",
+//         });
+//       }
+
+//       bookingData = {
+//         ...bookingData,
+//         vendorPriceAtBooking: vendor.price,
+//         discount: 0,
+//         extraCharges: 0,
+//         finalPrice: vendor.price,
+//       };
+//     }
+
+//     const booking = await Booking.create(bookingData);
+
+//     return res.status(201).json({
+//       success: true,
+//       message: "Booking created successfully",
+//       data: booking,
+//     });
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).json({ success: false, message: "Internal Server Error" });
+//   }
+// };
+
 export const createBooking = async (req, res) => {
   try {
     const vendorId = req.params.vendorId;
@@ -13,6 +103,28 @@ export const createBooking = async (req, res) => {
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
+    }
+    const vendor = await Vendor.findById(vendorId);
+
+    if (!vendor) {
+      return res.status(404).json({
+        success: false,
+        message: "Vendor not found",
+      });
+    }
+    const existingBooking = await Booking.find({
+      customerId,
+      status: { $in: ["pending", "accepted"] },
+    }).populate("vendorId");
+
+    const alreadyBookedSameService=existingBooking.some(
+      (b)=>b.vendorId?.service===vendor.service
+    )
+    if (alreadyBookedSameService) {
+      return res.status(400).json({
+        success: false,
+        message: "You already have a pending or accepted booking for this service",
+      });
     }
 
     let bookingData = {
@@ -62,14 +174,7 @@ export const createBooking = async (req, res) => {
 
     
     if (bookingMode === "DIRECT") {
-      const vendor = await Vendor.findById(vendorId);
-
-      if (!vendor) {
-        return res.status(404).json({
-          success: false,
-          message: "Vendor not found",
-        });
-      }
+      
 
       bookingData = {
         ...bookingData,
@@ -280,3 +385,29 @@ export const updateCharges=async(req,res)=>{
         })
     }
 }
+export const checkServiceBookingStatus = async (req, res) => {
+  try {
+    const customerId = req.user.id;
+    const { service } = req.params;
+
+    const bookings = await Booking.find({
+      customerId,
+      status: { $in: ["pending", "accepted"] },
+    }).populate("vendorId");
+
+    const alreadyBooked = bookings.some(
+      (b) => b.vendorId?.service === service
+    );
+
+    return res.status(200).json({
+      success: true,
+      booked: alreadyBooked,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+    });
+  }
+};

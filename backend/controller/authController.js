@@ -54,7 +54,7 @@ export const resetPassword=async(req,res)=>{
         const user=await User.findOne({email});
         if(!user){
             return res.status(404).json({
-                success:'false',
+                success:false,
                 message:'User not found'
             })
         }

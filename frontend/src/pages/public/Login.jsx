@@ -40,6 +40,7 @@ export default function BasicCard() {
                 else{
                     localStorage.setItem('myToken',res.data.token)
                     navigate('/afterlogin')
+                    //navigate('/user/dashboard')
                 }
             }
             else{

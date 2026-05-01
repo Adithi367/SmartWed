@@ -85,7 +85,7 @@ export default function BookingStatus() {
           </Card>
         ))}
       </Box>
-      <Box sx={{mt: 4 ,display:'flex',justifyContent:'center',p:3}}>
+      {/* <Box sx={{mt: 4 ,display:'flex',justifyContent:'center',p:3}}>
         <Button
           variant="contained"
           sx={{ backgroundColor: "#e91e63", color: "white",mt:4,"&:hover": { backgroundColor: "#c2185b" }}}
@@ -93,7 +93,7 @@ export default function BookingStatus() {
         >
           View Bill
         </Button>
-      </Box>
+      </Box> */}
     </Box>
     
   );

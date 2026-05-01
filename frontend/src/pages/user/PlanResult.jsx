@@ -219,7 +219,7 @@ useEffect(() => {
 
       <Card
         sx={{
-          width: "400px",
+          width: "500px",
           borderRadius: "20px",
           boxShadow: 6,
           p: 2,
@@ -228,7 +228,7 @@ useEffect(() => {
           alignItems: "center",
         }}
       >
-        <PieChart width={350} height={350}>
+        <PieChart width={400} height={350}>
           <Pie
             data={chartData}
             dataKey="value"

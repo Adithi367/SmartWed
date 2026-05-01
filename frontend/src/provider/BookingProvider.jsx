@@ -26,6 +26,17 @@ const BookingProvider=({children})=>{
             
         }
     }
+    const checkServiceStatus=async(service)=>{
+        try {
+            const token=localStorage.getItem('myToken')
+            const res=await axios.get(`${BaseUrl}/booking/checkServiceBookingStatus/${service}?t=${Date.now()}`,{
+                headers:{auth:token}
+            })
+            return res;
+        } catch (error) {
+            console.log(error)
+        }
+    }
     const checkStatus=async(id)=>{
         try {
             const token=localStorage.getItem('myToken')
@@ -84,6 +95,7 @@ const BookingProvider=({children})=>{
         checkStatus,
         getBookings,
         addReview,
+        checkServiceStatus,
         generateBill
     }
     return(

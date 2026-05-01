@@ -103,7 +103,7 @@ function ResponsiveAppBar() {
                 </MenuItem>
               )} */}
               {userToken && (
-                <MenuItem onClick={()=>{navigate('/myprofile'); handleCloseNavMenu();}}>
+                <MenuItem onClick={()=>{navigate('/user/dashboard'); handleCloseNavMenu();}}>
                   My Profile
                 </MenuItem>
               )}
@@ -155,7 +155,7 @@ function ResponsiveAppBar() {
               </Button>
             )} */}
             {userToken && (
-              <Button sx={{color:'white',fontWeight:'bold'}} onClick={()=>{navigate('/myprofile')}}>
+              <Button sx={{color:'white',fontWeight:'bold'}} onClick={()=>{navigate('/user/dashboard')}}>
                 My Profile
               </Button>
             )}

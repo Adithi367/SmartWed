@@ -139,11 +139,12 @@ export default function AfterLogin() {
         ))}
       </Grid>
 
-      <Box sx={{ textAlign: "center", mt: 5 }}>
-        <Button sx={{backgroundColor:'rgba(255, 0, 93, 0.93)'}}
+      <Box sx={{left:0,right:0, textAlign: "center" ,position:'fixed',bottom:20,zIndex:2000,justifyContent:'center'}}>
+        <Button sx={{backgroundColor:'#e91e63',fontWeight:'bold',px:6,py:1.3,"&:hover":{backgroundColor:'#c2185b'},boxShadow:'0 8px 20px rgba(0,0,0,0.25)'}}
           variant="contained"
           onClick={() => navigate("/budgetplanner")}
         >
+          {/* //rgba(255, 0, 93, 0.93) */}
           Start Planning
         </Button>
       </Box>

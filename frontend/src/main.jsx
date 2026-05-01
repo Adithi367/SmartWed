@@ -7,8 +7,10 @@ import PlanProvider from './provider/PlanProvider.jsx'
 import BookingProvider from './provider/BookingProvider.jsx'
 import AdminProvider from './provider/AdminProvider.jsx'
 import QuotationProvider from './provider/QuotationProvider.jsx'
+import { BrowserRouter } from 'react-router-dom'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <BrowserRouter>
     <UserProvider>
       <PlanProvider>
         <BookingProvider>
@@ -20,5 +22,6 @@ createRoot(document.getElementById('root')).render(
         </BookingProvider>
       </PlanProvider>
     </UserProvider>    
+    </BrowserRouter>
   </StrictMode>,
 )
