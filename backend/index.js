@@ -15,7 +15,7 @@ const PORT=process.env.PORT
 app.use(express.json())
 mongoConnection();
 app.use(cors({
-    origin:['http://localhost:5173']
+    origin:['http://localhost:5173','https://smart-wed.vercel.app']
 }));
 app.get('/',(req,res)=>{
     console.log('API is working')
