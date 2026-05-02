@@ -84,7 +84,7 @@ import BudgetPlanner from "./pages/user/BudgetPlanner";
 import PlanResult from "./pages/user/PlanResult";
 import VendorDetails from "./pages/user/VendorDetails";
 import BookingPage from "./pages/user/BookingPage";
-import BookingStatus from './pages/user/BookingStatus'
+import BookingStatus from './pages/user/BookingStatus.jsx'
 
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import ViewBookings from "./pages/admin/ViewBookings";
