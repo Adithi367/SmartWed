@@ -164,7 +164,17 @@ export default function UserDashboardLayout(props) {
         )
       }}
     >
-      <DashboardLayout  >
+      <DashboardLayout
+  sx={{
+    height: "100vh",
+    "& main": {
+      height: "100vh",
+      overflowY: "auto",
+      background: "linear-gradient(180deg, #fff0f5, #ffffff)",
+      paddingBottom: "80px",
+    },
+  }}
+>
         <PageContent pathname={router.pathname} />
       </DashboardLayout>
     </AppProvider>

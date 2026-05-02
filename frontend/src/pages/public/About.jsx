@@ -31,7 +31,7 @@ export default function About() {
   return (
     <Box
       sx={{
-        minHeight: "100vh",
+        minHeight: "110vh",
         background: "radial-gradient(circle at top, #f6f2ff, #ffffff 60%)",
         px: 3,
         py: 6,
@@ -45,7 +45,7 @@ export default function About() {
         sx={{
           position: "absolute",
           width: 350,
-          height: 350,
+          height: 450,
           background: "rgba(123,31,162,0.25)",
           filter: "blur(140px)",
           top: -100,
