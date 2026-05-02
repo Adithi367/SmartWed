@@ -28,7 +28,7 @@ export default function AfterLogin() {
   useEffect(() => {
     const fetchVendors = async () => {
       try {
-        const res = await axios.get("http://localhost:7000/vendor/getVendor", {
+        const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/vendor/getVendor`, {
           params: {
             service: selectedCategory !== "All" ? selectedCategory : "",
           },

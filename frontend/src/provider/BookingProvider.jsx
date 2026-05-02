@@ -2,6 +2,7 @@ import BookingContext from "../context/BookingContext";
 import axios from 'axios'
 const BookingProvider=({children})=>{
     const BaseUrl=import.meta.env.VITE_BASE_URL;
+    
     const getVendorById=async(id)=>{
         try {
             const res=await axios.get(`${BaseUrl}/vendor/getVendorById/${id}`)
