@@ -83,7 +83,6 @@ import AdminLayout from "./pages/admin/AdminSidebar";
 import BudgetPlanner from "./pages/user/BudgetPlanner";
 import PlanResult from "./pages/user/PlanResult";
 import VendorDetails from "./pages/user/VendorDetails";
-import BookingPage from "./pages/user/BookingPage";
 import BookingStatus from './pages/user/BookingStatus.jsx'
 
 import AdminDashboard from "./pages/admin/AdminDashboard";
@@ -118,7 +117,7 @@ function App() {
         <Route path="/budgetplanner" element={<BudgetPlanner />} />
         <Route path="/planresult" element={<PlanResult />} />
         <Route path="/vendor/:id" element={<VendorDetails />} />
-        <Route path="/book/:vendorId" element={<BookingPage />} />
+        {/* <Route path="/book/:vendorId" element={<BookingPage />} /> */}
         <Route path="/bookingStatus" element={<BookingStatus />} />
 
         {/* USER DASHBOARD */}
